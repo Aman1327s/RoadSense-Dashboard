@@ -17,6 +17,15 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+<<<<<<< HEAD
+=======
+import obstacleImg from "./assets/obstacle-on-road.jpg";
+import potholeImg from "./assets/potholes.webp";
+import crackImg from "./assets/road-cracks.webp";
+import waterloggingImg from "./assets/waterlogging.webp";
+import heroImg from "./assets/hero.png";
+
+>>>>>>> origin/update-v2
 /* ------------------------------------------------------------------ */
 /*  DESIGN TOKENS — LIGHT THEME & GOVERNMENT ORANGE ACCENT             */
 /* ------------------------------------------------------------------ */
@@ -52,12 +61,29 @@ const COLORS = {
 };
 
 const TYPE_META = {
+<<<<<<< HEAD
   Pothole: { color: COLORS.red, label: "Pothole" },
   Crack: { color: COLORS.orange, label: "Crack" },
   Debris: { color: COLORS.dust, label: "Debris" },
   Waterlogging: { color: COLORS.blue, label: "Waterlogging" },
   "Edge Damage": { color: COLORS.violet, label: "Road-Edge Damage" },
 };
+=======
+  Pothole: { color: COLORS.red, label: "Pothole", image: potholeImg },
+  Crack: { color: COLORS.orange, label: "Crack", image: crackImg },
+  Obstacle: { color: COLORS.dust, label: "Obstacle", image: obstacleImg },
+  Waterlogging: { color: COLORS.blue, label: "Waterlogging", image: waterloggingImg },
+  "Edge Damage": { color: COLORS.violet, label: "Road-Edge Damage", image: crackImg },
+};
+
+function getIssueImage(type) {
+  if (TYPE_META[type]?.image) return TYPE_META[type].image;
+  if (type === "Debris" || type === "Obstacle") return obstacleImg;
+  if (type === "Edge Damage" || type === "Crack") return crackImg;
+  if (type === "Waterlogging") return waterloggingImg;
+  return potholeImg;
+}
+>>>>>>> origin/update-v2
 const SEVERITY_META = { High: COLORS.red, Medium: COLORS.orange, Low: COLORS.dust };
 const STAGES = ["Detected", "AI Verified", "Officer Verified", "Assigned", "Repair In Progress", "Repair Completed", "AI Re-verification", "Resolved"];
 const STAGE_COLOR = [COLORS.amber, COLORS.amber, COLORS.blue, COLORS.violet, COLORS.orange, COLORS.blue, COLORS.violet, COLORS.green];
@@ -110,12 +136,21 @@ function computePriority(issue) {
 /*  MOCK DATA                                                          */
 /* ------------------------------------------------------------------ */
 const initialRoads = [
+<<<<<<< HEAD
   { name: "Ring Road", zone: "South", ward: 42, authority: "PWD", contractor: "Shree Infra Works", traffic: "HIGH", roadClass: "Arterial", proximity: "Major Junction", potholes: 18, cracks: 12, waterlogging: 4, debris: 7, score: 62, trend: "down", forecast: 48, recurrence: "HIGH" },
   { name: "MG Road", zone: "South", ward: 8, authority: "Municipal Corporation", contractor: "Delhi Roadways Ltd.", traffic: "HIGH", roadClass: "Arterial", proximity: "School Zone", potholes: 9, cracks: 14, waterlogging: 1, debris: 5, score: 74, trend: "up", forecast: 79, recurrence: "LOW" },
   { name: "Karol Bagh", zone: "Central", ward: 27, authority: "Municipal Corporation", contractor: "Nirman Constructions", traffic: "MEDIUM", roadClass: "Collector", proximity: "Hospital Zone", potholes: 6, cracks: 10, waterlogging: 0, debris: 8, score: 81, trend: "flat", forecast: 80, recurrence: "LOW" },
   { name: "NH-48", zone: "South", ward: 55, authority: "NHAI", contractor: "NHAI Zone-3 Maintenance", traffic: "HIGH", roadClass: "Arterial", proximity: "None", potholes: 12, cracks: 3, waterlogging: 0, debris: 2, score: 70, trend: "down", forecast: 60, recurrence: "MEDIUM" },
   { name: "CP Outer Circle", zone: "Central", ward: 5, authority: "Municipal Corporation", contractor: "Delhi Roadways Ltd.", traffic: "LOW", roadClass: "Collector", proximity: "Major Junction", potholes: 4, cracks: 5, waterlogging: 0, debris: 3, score: 88, trend: "up", forecast: 91, recurrence: "LOW" },
   { name: "Chandni Chowk", zone: "North", ward: 33, authority: "Drainage Dept.", contractor: "Jal Nirmaan Pvt Ltd", traffic: "MEDIUM", roadClass: "Local", proximity: "School Zone", potholes: 8, cracks: 6, waterlogging: 6, debris: 2, score: 66, trend: "down", forecast: 54, recurrence: "HIGH" },
+=======
+  { name: "Ring Road", zone: "South", ward: 42, authority: "PWD", contractor: "Shree Infra Works", traffic: "HIGH", roadClass: "Arterial", proximity: "Major Junction", potholes: 18, cracks: 12, waterlogging: 4, obstacles: 7, score: 62, trend: "down", forecast: 48, recurrence: "HIGH" },
+  { name: "MG Road", zone: "South", ward: 8, authority: "Municipal Corporation", contractor: "Delhi Roadways Ltd.", traffic: "HIGH", roadClass: "Arterial", proximity: "School Zone", potholes: 9, cracks: 14, waterlogging: 1, obstacles: 5, score: 74, trend: "up", forecast: 79, recurrence: "LOW" },
+  { name: "Karol Bagh", zone: "Central", ward: 27, authority: "Municipal Corporation", contractor: "Nirman Constructions", traffic: "MEDIUM", roadClass: "Collector", proximity: "Hospital Zone", potholes: 6, cracks: 10, waterlogging: 0, obstacles: 8, score: 81, trend: "flat", forecast: 80, recurrence: "LOW" },
+  { name: "NH-48", zone: "South", ward: 55, authority: "NHAI", contractor: "NHAI Zone-3 Maintenance", traffic: "HIGH", roadClass: "Arterial", proximity: "None", potholes: 12, cracks: 3, waterlogging: 0, obstacles: 2, score: 70, trend: "down", forecast: 60, recurrence: "MEDIUM" },
+  { name: "CP Outer Circle", zone: "Central", ward: 5, authority: "Municipal Corporation", contractor: "Delhi Roadways Ltd.", traffic: "LOW", roadClass: "Collector", proximity: "Major Junction", potholes: 4, cracks: 5, waterlogging: 0, obstacles: 3, score: 88, trend: "up", forecast: 91, recurrence: "LOW" },
+  { name: "Chandni Chowk", zone: "North", ward: 33, authority: "Drainage Dept.", contractor: "Jal Nirmaan Pvt Ltd", traffic: "MEDIUM", roadClass: "Local", proximity: "School Zone", potholes: 8, cracks: 6, waterlogging: 6, obstacles: 2, score: 66, trend: "down", forecast: 54, recurrence: "HIGH" },
+>>>>>>> origin/update-v2
 ];
 const roadInfo = Object.fromEntries(initialRoads.map((r) => [r.name, r]));
 
@@ -124,12 +159,20 @@ const rawIssues = [
   { id: "RS-1041", type: "Crack", location: "Karol Bagh", x: 470, y: 260, severity: "Medium", confidence: 89, reports: 4, source: "AI / Bus Detection", bus: "Bus #31", date: "25 Aug 2026", time: "09:58 AM", lastSeen: "41 min ago", ageHours: 0.7, stageIndex: 2 },
   { id: "RS-1039", type: "Waterlogging", location: "Chandni Chowk", x: 340, y: 360, severity: "High", confidence: 93, reports: 6, source: "Citizen Complaint", bus: "Bus #42", date: "25 Aug 2026", time: "08:15 AM", lastSeen: "2 hr ago", ageHours: 2, stageIndex: 3 },
   { id: "RS-1038", type: "Pothole", location: "MG Road", x: 560, y: 150, severity: "High", confidence: 91, reports: 5, source: "AI / Bus Detection", bus: "Bus #17", date: "24 Aug 2026", time: "06:40 PM", lastSeen: "16 hr ago", ageHours: 16, stageIndex: 1 },
+<<<<<<< HEAD
   { id: "RS-1037", type: "Debris", location: "NH-48", x: 640, y: 400, severity: "Low", confidence: 78, reports: 2, source: "AI / Bus Detection", bus: "Bus #08", date: "24 Aug 2026", time: "05:22 PM", lastSeen: "17 hr ago", ageHours: 17, stageIndex: 0 },
+=======
+  { id: "RS-1037", type: "Obstacle", location: "NH-48", x: 640, y: 400, severity: "Low", confidence: 78, reports: 2, source: "AI / Bus Detection", bus: "Bus #08", date: "24 Aug 2026", time: "05:22 PM", lastSeen: "17 hr ago", ageHours: 17, stageIndex: 0 },
+>>>>>>> origin/update-v2
   { id: "RS-1036", type: "Edge Damage", location: "CP Outer Circle", x: 130, y: 340, severity: "Medium", confidence: 85, reports: 3, source: "Field Inspection", bus: "Bus #24", date: "24 Aug 2026", time: "03:05 PM", lastSeen: "19 hr ago", ageHours: 19, stageIndex: 2 },
   { id: "RS-1035", type: "Crack", location: "Ring Road", x: 260, y: 90, severity: "Medium", confidence: 88, reports: 4, source: "AI / Bus Detection", bus: "Bus #31", date: "23 Aug 2026", time: "11:10 AM", lastSeen: "2 days ago", ageHours: 48, stageIndex: 7 },
   { id: "RS-1034", type: "Pothole", location: "Karol Bagh", x: 420, y: 300, severity: "High", confidence: 97, reports: 9, source: "AI / Bus Detection", bus: "Bus #42", date: "23 Aug 2026", time: "09:44 AM", lastSeen: "2 days ago", ageHours: 50, stageIndex: 4 },
   { id: "RS-1033", type: "Waterlogging", location: "Chandni Chowk", x: 300, y: 380, severity: "Medium", confidence: 82, reports: 3, source: "Citizen Complaint", bus: "Bus #17", date: "22 Aug 2026", time: "07:52 PM", lastSeen: "3 days ago", ageHours: 72, stageIndex: 2 },
+<<<<<<< HEAD
   { id: "RS-1032", type: "Debris", location: "MG Road", x: 600, y: 190, severity: "Low", confidence: 74, reports: 1, source: "AI / Bus Detection", bus: "Bus #08", date: "22 Aug 2026", time: "04:18 PM", lastSeen: "3 days ago", ageHours: 76, stageIndex: 0 },
+=======
+  { id: "RS-1032", type: "Obstacle", location: "MG Road", x: 600, y: 190, severity: "Low", confidence: 74, reports: 1, source: "AI / Bus Detection", bus: "Bus #08", date: "22 Aug 2026", time: "04:18 PM", lastSeen: "3 days ago", ageHours: 76, stageIndex: 0 },
+>>>>>>> origin/update-v2
   { id: "RS-1031", type: "Pothole", location: "NH-48", x: 680, y: 430, severity: "High", confidence: 95, reports: 7, source: "AI / Bus Detection", bus: "Bus #24", date: "21 Aug 2026", time: "01:30 PM", lastSeen: "4 days ago", ageHours: 96, stageIndex: 5 },
   { id: "RS-1030", type: "Crack", location: "CP Outer Circle", x: 100, y: 300, severity: "Low", confidence: 79, reports: 2, source: "AI / Bus Detection", bus: "Bus #31", date: "20 Aug 2026", time: "10:05 AM", lastSeen: "5 days ago", ageHours: 120, stageIndex: 7 },
   { id: "RS-1029", type: "Waterlogging", location: "Chandni Chowk", x: 320, y: 400, severity: "Medium", confidence: 88, reports: 5, source: "IoT Sensor", bus: "Drain Sensor #7", date: "25 Aug 2026", time: "07:10 AM", lastSeen: "3 hr ago", ageHours: 3, stageIndex: 1 },
@@ -204,7 +247,11 @@ const DELHI_NCR_CENTER = [28.58, 77.18];
 /*  LEAFLET ICON FACTORIES                                             */
 /* ------------------------------------------------------------------ */
 function signIcon(type, severity, active) {
+<<<<<<< HEAD
   const c = TYPE_META[type].color;
+=======
+  const c = TYPE_META[type]?.color || COLORS.dust;
+>>>>>>> origin/update-v2
   const size = severity === "High" ? 14 : 11;
   const pulse = severity === "High"
     ? `<span style="position:absolute;inset:${-8}px;border-radius:999px;background:${c};opacity:.25;animation:rsPulse 2s infinite;"></span>` : "";
@@ -239,7 +286,12 @@ function busIcon(bus, showLabel) {
   return L.divIcon({ html, className: "rs-marker", iconSize: [22, 22] });
 }
 
+<<<<<<< HEAD
 const TILE_URL = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+=======
+const cartoKey = import.meta.env.VITE_CARTO_API_KEY;
+const TILE_URL = `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png${cartoKey ? `?key=${cartoKey}` : ""}`;
+>>>>>>> origin/update-v2
 const TILE_ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function RoadOverlay({ heatmap }) {
@@ -278,10 +330,20 @@ function MiniMap({ issues, onSelectIssue }) {
         return (
           <Marker key={iss.id} position={pos} icon={signIcon(iss.type, iss.severity, false)} eventHandlers={{ click: () => onSelectIssue(iss) }}>
             <Popup>
+<<<<<<< HEAD
               <div style={{ padding: 2 }}>
                 <strong>{iss.type} ({iss.severity})</strong><br />
                 <span>{iss.location}</span><br />
                 <button className="btn btn-solid" style={{ marginTop: 6, padding: "3px 8px", fontSize: 10.5 }} onClick={() => onSelectIssue(iss)}>View Details</button>
+=======
+              <div className="map-popup-card">
+                <img src={getIssueImage(iss.type)} alt={iss.type} className="popup-defect-img" />
+                <div style={{ padding: "2px 0" }}>
+                  <strong style={{ color: COLORS.textPrimary, fontSize: 12.5 }}>{iss.type} ({iss.severity})</strong><br />
+                  <span style={{ color: COLORS.textMuted, fontSize: 11 }}>{iss.location}</span><br />
+                  <button className="btn btn-solid" style={{ marginTop: 6, padding: "3px 8px", fontSize: 10.5, width: "100%", justifyContent: "center" }} onClick={() => onSelectIssue(iss)}>View Details</button>
+                </div>
+>>>>>>> origin/update-v2
               </div>
             </Popup>
           </Marker>
@@ -468,6 +530,7 @@ function IssueDetailModal({ issue, onClose, advanceStage, onToast }) {
                 <button className={showEvidence === "before" ? "active" : ""} onClick={() => setShowEvidence("before")}>AI Detection Frame</button>
                 {issue.stageIndex >= 5 && <button className={showEvidence === "after" ? "active" : ""} onClick={() => setShowEvidence("after")}>Post-Repair Inspection</button>}
               </div>
+<<<<<<< HEAD
               <div className="detail-image" style={{ height: 160 }}>
                 {showEvidence === "before" ? (
                   <>
@@ -475,6 +538,17 @@ function IssueDetailModal({ issue, onClose, advanceStage, onToast }) {
                       <span className="bbox-label" style={{ background: meta.color }}>{issue.type} {issue.confidence}%</span>
                     </div>
                     <div className="camera-watermark"><Camera size={13} /> On-Bus Edge Camera · Frame ID #{issue.id} · 1080p</div>
+=======
+              <div className="detail-image" style={{ height: 180 }}>
+                {showEvidence === "before" ? (
+                  <>
+                    <img
+                      src={meta?.image || getIssueImage(issue.type)}
+                      alt={`${issue.type} defect frame`}
+                      className="defect-evidence-img"
+                    />
+                    <div className="camera-watermark"><Camera size={13} /> On-Bus Edge Camera · Frame ID #{issue.id} · 1080p Lens</div>
+>>>>>>> origin/update-v2
                   </>
                 ) : (
                   <div className="repair-frame">
@@ -654,6 +728,7 @@ function MapView({ issues, setSelectedIssue, buses }) {
                   eventHandlers={{ click: () => setSelectedIssue(iss) }}
                 >
                   <Popup>
+<<<<<<< HEAD
                     <div style={{ padding: 4 }}>
                       <strong style={{ color: COLORS.textPrimary, fontSize: 13 }}>{iss.type} (#{iss.id})</strong><br />
                       <span style={{ fontSize: 11, color: COLORS.textMuted }}>{iss.location} · Ward {iss.ward}</span><br />
@@ -661,6 +736,18 @@ function MapView({ issues, setSelectedIssue, buses }) {
                       <button className="btn btn-solid" style={{ marginTop: 6, padding: "4px 10px", fontSize: 11, width: "100%", justifyContent: "center" }} onClick={() => setSelectedIssue(iss)}>
                         Open Full Details Modal
                       </button>
+=======
+                    <div className="map-popup-card">
+                      <img src={getIssueImage(iss.type)} alt={iss.type} className="popup-defect-img" />
+                      <div style={{ padding: "2px 0" }}>
+                        <strong style={{ color: COLORS.textPrimary, fontSize: 13 }}>{iss.type} (#{iss.id})</strong><br />
+                        <span style={{ fontSize: 11, color: COLORS.textMuted }}>{iss.location} · Ward {iss.ward}</span><br />
+                        <span style={{ fontSize: 11, color: COLORS.primary, fontWeight: 600 }}>Confidence: {iss.confidence}%</span><br />
+                        <button className="btn btn-solid" style={{ marginTop: 6, padding: "4px 10px", fontSize: 11, width: "100%", justifyContent: "center" }} onClick={() => setSelectedIssue(iss)}>
+                          Open Full Details Modal
+                        </button>
+                      </div>
+>>>>>>> origin/update-v2
                     </div>
                   </Popup>
                 </Marker>
@@ -692,16 +779,26 @@ function MapView({ issues, setSelectedIssue, buses }) {
 /* ------------------------------------------------------------------ */
 /*  COMMAND CENTER VIEW                                                */
 /* ------------------------------------------------------------------ */
+<<<<<<< HEAD
 function CommandCenterView({ issues, setTab, setSelectedIssue, advanceStage, zoneFilter, wardFilter, onToast }) {
   const scoped = issues.filter((i) => (zoneFilter === "All Zones" || i.zone === zoneFilter) && (wardFilter === "All Wards" || String(i.ward) === wardFilter));
+=======
+function CommandCenterView({ issues, setTab, setSelectedIssue, advanceStage, zoneFilter, onToast }) {
+  const scoped = issues.filter((i) => zoneFilter === "All Zones" || i.zone === zoneFilter);
+>>>>>>> origin/update-v2
   const withScore = scoped.map((i) => ({ ...i, ...computePriority(i) }));
   const counts = { P1: 0, P2: 0, P3: 0, P4: 0 };
   withScore.forEach((i) => { counts[tierOf(i.total).tier]++; });
   const resolved = scoped.filter((i) => i.stageIndex === 7).length;
   const critical = withScore.filter((i) => tierOf(i.total).tier === "P1" && i.stageIndex < 5).sort((a, b) => b.total - a.total).slice(0, 4);
 
+<<<<<<< HEAD
   const topRoads = [...initialRoads].sort((a, b) => (b.potholes + b.cracks + b.waterlogging + b.debris) - (a.potholes + a.cracks + a.waterlogging + a.debris));
   const maxTotal = topRoads[0].potholes + topRoads[0].cracks + topRoads[0].waterlogging + topRoads[0].debris;
+=======
+  const topRoads = [...initialRoads].sort((a, b) => (b.potholes + b.cracks + b.waterlogging + b.obstacles) - (a.potholes + a.cracks + a.waterlogging + a.obstacles));
+  const maxTotal = topRoads[0].potholes + topRoads[0].cracks + topRoads[0].waterlogging + topRoads[0].obstacles;
+>>>>>>> origin/update-v2
   const onlineC = initialBuses.filter((b) => b.status === "ONLINE").length, syncC = initialBuses.filter((b) => b.status === "SYNCING").length, offC = initialBuses.filter((b) => b.status === "OFFLINE").length;
 
   const handleQuickDispatch = (id, authority) => {
@@ -731,7 +828,14 @@ function CommandCenterView({ issues, setTab, setSelectedIssue, advanceStage, zon
             {critical.map((iss) => (
               <div className="alert-card" key={iss.id}>
                 <div className="alert-top">
+<<<<<<< HEAD
                   <span className="alert-dot" />
+=======
+                  <div className="alert-img-wrap">
+                    <img src={getIssueImage(iss.type)} alt={iss.type} className="alert-defect-img" />
+                    <span className="alert-dot-badge" style={{ background: TYPE_META[iss.type]?.color || COLORS.red }} />
+                  </div>
+>>>>>>> origin/update-v2
                   <div style={{ flex: 1 }}>
                     <div className="alert-title">{iss.type} · {iss.location}</div>
                     <div className="alert-sub">{iss.reports} corroborating detections · Last detected {iss.lastSeen}</div>
@@ -769,7 +873,11 @@ function CommandCenterView({ issues, setTab, setSelectedIssue, advanceStage, zon
           </div>
           <div className="bar-list">
             {topRoads.map((r, i) => {
+<<<<<<< HEAD
               const total = r.potholes + r.cracks + r.waterlogging + r.debris;
+=======
+              const total = r.potholes + r.cracks + r.waterlogging + r.obstacles;
+>>>>>>> origin/update-v2
               return (
                 <div className="bar-row" key={r.name}>
                   <span className="bar-rank">0{i + 1}</span>
@@ -819,7 +927,11 @@ function CommandCenterView({ issues, setTab, setSelectedIssue, advanceStage, zon
 /* ------------------------------------------------------------------ */
 /*  ISSUES & ALERTS TABLE VIEW                                         */
 /* ------------------------------------------------------------------ */
+<<<<<<< HEAD
 function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
+=======
+function IssuesView({ issues, setSelectedIssue, zoneFilter }) {
+>>>>>>> origin/update-v2
   const [typeFilter, setTypeFilter] = useState("All");
   const [sevFilter, setSevFilter] = useState("All");
   const [stageFilter, setStageFilter] = useState("All");
@@ -827,12 +939,19 @@ function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
 
   const filtered = useMemo(() => issues.filter((i) =>
     (zoneFilter === "All Zones" || i.zone === zoneFilter) &&
+<<<<<<< HEAD
     (wardFilter === "All Wards" || String(i.ward) === wardFilter) &&
+=======
+>>>>>>> origin/update-v2
     (typeFilter === "All" || i.type === typeFilter) &&
     (sevFilter === "All" || i.severity === sevFilter) &&
     (stageFilter === "All" || (stageFilter === "Open" && i.stageIndex < 7) || (stageFilter === "Resolved" && i.stageIndex === 7)) &&
     (search === "" || i.location.toLowerCase().includes(search.toLowerCase()) || i.id.toLowerCase().includes(search.toLowerCase()))
+<<<<<<< HEAD
   ), [issues, typeFilter, sevFilter, stageFilter, search, zoneFilter, wardFilter]);
+=======
+  ), [issues, typeFilter, sevFilter, stageFilter, search, zoneFilter]);
+>>>>>>> origin/update-v2
 
   const select = (arr) => ["All"].concat(arr);
 
@@ -869,8 +988,11 @@ function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
               <tr>
                 <th>Defect ID &amp; Type</th>
                 <th>Corridor Location</th>
+<<<<<<< HEAD
                 <th>Detection Source</th>
                 <th>Jurisdiction</th>
+=======
+>>>>>>> origin/update-v2
                 <th>Severity</th>
                 <th>Priority</th>
                 <th>Workflow Stage</th>
@@ -884,7 +1006,14 @@ function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
                   <tr key={iss.id} onClick={() => setSelectedIssue(iss)}>
                     <td>
                       <div className="issue-cell">
+<<<<<<< HEAD
                         <span className="dot" style={{ background: TYPE_META[iss.type].color }} />
+=======
+                        <div className="issue-thumb-wrap">
+                          <img src={getIssueImage(iss.type)} alt={iss.type} className="issue-thumb" />
+                          <span className="dot-indicator" style={{ background: TYPE_META[iss.type]?.color || COLORS.primary }} />
+                        </div>
+>>>>>>> origin/update-v2
                         <div>
                           <div className="issue-type">{iss.type}</div>
                           <div className="issue-id">{iss.id}</div>
@@ -892,10 +1021,15 @@ function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
                       </div>
                     </td>
                     <td>
+<<<<<<< HEAD
                       <strong>{iss.location}</strong> <span className="ward-tag">Ward {iss.ward}</span>
                     </td>
                     <td><SourceTag source={iss.source} /></td>
                     <td className="mono">{iss.authority}</td>
+=======
+                      <strong>{iss.location}</strong>
+                    </td>
+>>>>>>> origin/update-v2
                     <td><SeverityChip severity={iss.severity} /></td>
                     <td><PriorityBadge score={p.total} compact /></td>
                     <td><StagePill idx={iss.stageIndex} /></td>
@@ -907,7 +1041,11 @@ function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
               })}
               {filtered.length === 0 && (
                 <tr>
+<<<<<<< HEAD
                   <td colSpan={8} className="empty-row">No defects match the selected filters.</td>
+=======
+                  <td colSpan={6} className="empty-row">No defects match the selected filters.</td>
+>>>>>>> origin/update-v2
                 </tr>
               )}
             </tbody>
@@ -921,8 +1059,13 @@ function IssuesView({ issues, setSelectedIssue, zoneFilter, wardFilter }) {
 /* ------------------------------------------------------------------ */
 /*  MAINTENANCE QUEUE & FORECAST                                       */
 /* ------------------------------------------------------------------ */
+<<<<<<< HEAD
 function MaintenanceView({ issues, setSelectedIssue, advanceStage, zoneFilter, wardFilter, onToast }) {
   const scoped = issues.filter((i) => (zoneFilter === "All Zones" || i.zone === zoneFilter) && (wardFilter === "All Wards" || String(i.ward) === wardFilter));
+=======
+function MaintenanceView({ issues, setSelectedIssue, advanceStage, zoneFilter, onToast }) {
+  const scoped = issues.filter((i) => zoneFilter === "All Zones" || i.zone === zoneFilter);
+>>>>>>> origin/update-v2
   const ranked = scoped.map((i) => ({ ...i, ...computePriority(i) })).filter((i) => i.stageIndex < 7).sort((a, b) => b.total - a.total).slice(0, 8);
 
   const handleDispatch = (id, authority) => {
@@ -1146,7 +1289,11 @@ function AnalyticsView() {
         </div>
         <div className="gauge-grid">
           {initialRoads.map((r) => {
+<<<<<<< HEAD
             const total = r.potholes + r.cracks + r.waterlogging + r.debris;
+=======
+            const total = r.potholes + r.cracks + r.waterlogging + r.obstacles;
+>>>>>>> origin/update-v2
             return (
               <div className="gauge-card" key={r.name}>
                 <div className="gauge-card-name">{r.name}</div>
@@ -1155,7 +1302,11 @@ function AnalyticsView() {
                   <span><i style={{ background: TYPE_META.Pothole.color }} />Potholes: <b>{r.potholes}</b></span>
                   <span><i style={{ background: TYPE_META.Crack.color }} />Cracks: <b>{r.cracks}</b></span>
                   <span><i style={{ background: TYPE_META.Waterlogging.color }} />Waterlogging: <b>{r.waterlogging}</b></span>
+<<<<<<< HEAD
                   <span><i style={{ background: TYPE_META.Debris.color }} />Debris: <b>{r.debris}</b></span>
+=======
+                  <span><i style={{ background: TYPE_META.Obstacle.color }} />Obstacles: <b>{r.obstacles}</b></span>
+>>>>>>> origin/update-v2
                 </div>
                 <div className="gauge-total">{total} Total Logged Defects</div>
               </div>
@@ -1203,7 +1354,10 @@ export default function RoadSenseDashboard() {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [cityFilter, setCityFilter] = useState("Delhi");
   const [zoneFilter, setZoneFilter] = useState("All Zones");
+<<<<<<< HEAD
   const [wardFilter, setWardFilter] = useState("All Wards");
+=======
+>>>>>>> origin/update-v2
   const [bellOpen, setBellOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
@@ -1214,10 +1368,13 @@ export default function RoadSenseDashboard() {
     }, 3800);
   };
 
+<<<<<<< HEAD
   const wardOptions = ["All Wards"].concat(
     Array.from(new Set(initialRoads.filter((r) => zoneFilter === "All Zones" || r.zone === zoneFilter).map((r) => r.ward))).sort((a, b) => a - b)
   );
 
+=======
+>>>>>>> origin/update-v2
   const advanceStage = (id, targetIdx) => {
     setIssuesState((prev) => prev.map((i) => (i.id === id ? { ...i, stageIndex: Math.max(i.stageIndex, targetIdx) } : i)));
     if (selectedIssue && selectedIssue.id === id) {
@@ -1409,6 +1566,7 @@ export default function RoadSenseDashboard() {
           align-items: center;
           gap: 16px;
         }
+<<<<<<< HEAD
         .live-tag {
           display: flex;
           align-items: center;
@@ -1431,6 +1589,8 @@ export default function RoadSenseDashboard() {
           animation: pulse 1.6s infinite;
         }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+=======
+>>>>>>> origin/update-v2
 
         .bell-wrap { position: relative; }
         .bell-btn {
@@ -1774,10 +1934,16 @@ export default function RoadSenseDashboard() {
         .evidence-tabs { display: flex; gap: 6px; margin-top: 4px; }
         .evidence-tabs button { background: #f1f5f9; border: 1px solid #e2e8f0; color: #64748b; font-size: 11px; font-weight: 600; padding: 6px 11px; border-radius: 6px 6px 0 0; cursor: pointer; }
         .evidence-tabs button.active { background: #ffffff; color: #ea580c; border-color: #e2e8f0; border-bottom-color: #ffffff; }
+<<<<<<< HEAD
         .detail-image { position: relative; border-radius: 0 8px 8px 8px; background: #0f172a; border: 1px solid #e2e8f0; overflow: hidden; }
         .camera-watermark { position: absolute; bottom: 8px; left: 8px; font-family: var(--font-mono, monospace); font-size: 9.5px; color: #94a3b8; display: flex; align-items: center; gap: 5px; }
         .bbox { position: absolute; border: 2px solid; border-radius: 3px; }
         .bbox-label { position: absolute; top: -18px; left: -2px; font-size: 9.5px; font-weight: 700; color: #ffffff; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+=======
+        .detail-image { position: relative; border-radius: 0 8px 8px 8px; background: #0f172a; border: 1px solid #e2e8f0; overflow: hidden; height: 180px; }
+        .defect-evidence-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .camera-watermark { position: absolute; bottom: 8px; left: 8px; font-family: var(--font-mono, monospace); font-size: 9.5px; color: #f1f5f9; background: rgba(15,23,42,0.65); padding: 2px 6px; border-radius: 4px; backdrop-filter: blur(4px); display: flex; align-items: center; gap: 5px; z-index: 2; }
+>>>>>>> origin/update-v2
         .repair-frame { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #f0fdf4; padding: 16px; text-align: center; }
         .mini-panel-title { font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; margin-top: 14px; }
         .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; font-size: 11.5px; color: #334155; }
@@ -1811,7 +1977,22 @@ export default function RoadSenseDashboard() {
         .priority-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; border: 1px solid; white-space: nowrap; font-family: var(--font-sans, sans-serif); }
         .priority-badge-label { font-weight: 500; font-size: 10.5px; }
         .source-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; }
+<<<<<<< HEAD
         .ward-tag { font-size: 10.5px; color: #64748b; background: #f1f5f9; padding: 1px 6px; border-radius: 4px; margin-left: 6px; font-weight: 500; }
+=======
+
+        /* Alert Image Thumbs */
+        .alert-img-wrap { position: relative; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; flex-shrink: 0; border: 1px solid #e2e8f0; background: #0f172a; }
+        .alert-defect-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .alert-dot-badge { position: absolute; bottom: 2px; right: 2px; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #ffffff; }
+
+        /* Map Popup Image */
+        .map-popup-card { display: flex; flex-direction: column; gap: 6px; min-width: 170px; }
+        .popup-defect-img { width: 100%; height: 80px; object-fit: cover; border-radius: 5px; border: 1px solid #e2e8f0; display: block; }
+
+        /* Brand Logo */
+        .brand-logo-img { width: 34px; height: 34px; object-fit: contain; border-radius: 6px; flex-shrink: 0; }
+>>>>>>> origin/update-v2
 
         /* Filter Row & Search */
         .filters { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -1824,10 +2005,20 @@ export default function RoadSenseDashboard() {
         .table-wrap { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 8px; }
         table { width: 100%; border-collapse: collapse; font-size: 12.5px; background: #ffffff; }
         th { text-align: left; color: #475569; font-weight: 700; font-size: 10.5px; letter-spacing: 0.5px; text-transform: uppercase; padding: 10px 14px; border-bottom: 1px solid #e2e8f0; background: #f8fafc; }
+<<<<<<< HEAD
         td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
         tbody tr { cursor: pointer; transition: background 0.1s ease; }
         tbody tr:hover { background: #f8fafc; }
         .issue-cell { display: flex; align-items: center; gap: 10px; }
+=======
+        td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
+        tbody tr { cursor: pointer; transition: background 0.1s ease; }
+        tbody tr:hover { background: #f8fafc; }
+        .issue-cell { display: flex; align-items: center; gap: 10px; }
+        .issue-thumb-wrap { position: relative; width: 38px; height: 38px; border-radius: 6px; overflow: hidden; flex-shrink: 0; border: 1px solid #e2e8f0; background: #0f172a; }
+        .issue-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .issue-thumb-wrap .dot-indicator { position: absolute; bottom: 2px; right: 2px; width: 7px; height: 7px; border-radius: 50%; border: 1px solid #ffffff; }
+>>>>>>> origin/update-v2
         .dot { width: 9px; height: 9px; border-radius: 3px; transform: rotate(45deg); flex-shrink: 0; }
         .issue-type { font-weight: 600; color: #0f172a; }
         .issue-id { font-size: 10.5px; color: #64748b; font-family: var(--font-mono, monospace); margin-top: 1px; }
@@ -1944,7 +2135,11 @@ export default function RoadSenseDashboard() {
         {/* Sidebar Navigation */}
         <aside className="sidebar">
           <div className="brand">
+<<<<<<< HEAD
             <div className="brand-mark"><Navigation size={18} /></div>
+=======
+            <img src={heroImg} alt="RoadSense Logo" className="brand-logo-img" />
+>>>>>>> origin/update-v2
             <div>
               <div className="brand-name">ROADSENSE</div>
               <div className="brand-sub">MUNICIPAL ROAD INTELLIGENCE</div>
@@ -1965,7 +2160,10 @@ export default function RoadSenseDashboard() {
               <div className="topbar-sub">AI-powered road asset monitoring &amp; maintenance orchestration fed by public transit fleet</div>
             </div>
             <div className="topbar-right">
+<<<<<<< HEAD
               <span className="live-tag"><span className="live-dot" />TELEMETRY LIVE · 25 AUG 2026</span>
+=======
+>>>>>>> origin/update-v2
               <div className="bell-wrap">
                 <button className="bell-btn" onClick={() => setBellOpen((v) => !v)} aria-label="Notifications">
                   <Bell size={17} />
@@ -1977,7 +2175,14 @@ export default function RoadSenseDashboard() {
                     {criticalAlerts.slice(0, 4).map((a) => (
                       <div key={a.id} className="alert-card" style={{ marginBottom: 8, padding: 10 }}>
                         <div className="alert-top">
+<<<<<<< HEAD
                           <span className="alert-dot" />
+=======
+                          <div className="alert-img-wrap" style={{ width: 40, height: 40 }}>
+                            <img src={getIssueImage(a.type)} alt={a.type} className="alert-defect-img" />
+                            <span className="alert-dot-badge" style={{ background: TYPE_META[a.type]?.color || COLORS.red }} />
+                          </div>
+>>>>>>> origin/update-v2
                           <div style={{ flex: 1 }}>
                             <div className="alert-title" style={{ fontSize: 12.5 }}>{a.type} · {a.location}</div>
                             <div className="alert-sub" style={{ fontSize: 11 }}>Confidence {a.confidence}% · {a.reports} confirmations</div>
@@ -2001,6 +2206,7 @@ export default function RoadSenseDashboard() {
             <span className="jurisdiction-label">State/UT:</span>
             <select value={CITIES[cityFilter].state} disabled><option>{CITIES[cityFilter].state}</option></select>
             <span className="jurisdiction-label">City:</span>
+<<<<<<< HEAD
             <select value={cityFilter} onChange={(e) => { setCityFilter(e.target.value); setZoneFilter("All Zones"); setWardFilter("All Wards"); showToast(`Switched city to ${e.target.value}`); }}>
               {Object.keys(CITIES).map((c) => <option key={c}>{c}</option>)}
             </select>
@@ -2012,6 +2218,15 @@ export default function RoadSenseDashboard() {
             <select value={wardFilter} onChange={(e) => setWardFilter(e.target.value)} disabled={!CITIES[cityFilter].live}>
               {wardOptions.map((w) => <option key={w} value={w}>{w === "All Wards" ? w : "Ward " + w}</option>)}
             </select>
+=======
+            <select value={cityFilter} onChange={(e) => { setCityFilter(e.target.value); setZoneFilter("All Zones"); showToast(`Switched city to ${e.target.value}`); }}>
+              {Object.keys(CITIES).map((c) => <option key={c}>{c}</option>)}
+            </select>
+            <span className="jurisdiction-label">Zone:</span>
+            <select value={zoneFilter} onChange={(e) => setZoneFilter(e.target.value)} disabled={!CITIES[cityFilter].live}>
+              {ZONES.map((z) => <option key={z}>{z}</option>)}
+            </select>
+>>>>>>> origin/update-v2
             <span className="jurisdiction-note">Active Pilot: Delhi NCR · Multi-zone civic monitoring operational</span>
           </div>
 
@@ -2032,7 +2247,10 @@ export default function RoadSenseDashboard() {
                     setSelectedIssue={setSelectedIssue}
                     advanceStage={advanceStage}
                     zoneFilter={zoneFilter}
+<<<<<<< HEAD
                     wardFilter={wardFilter}
+=======
+>>>>>>> origin/update-v2
                     onToast={showToast}
                   />
                 )}
@@ -2048,7 +2266,10 @@ export default function RoadSenseDashboard() {
                     issues={issuesState}
                     setSelectedIssue={setSelectedIssue}
                     zoneFilter={zoneFilter}
+<<<<<<< HEAD
                     wardFilter={wardFilter}
+=======
+>>>>>>> origin/update-v2
                   />
                 )}
                 {tab === "maintenance" && (
@@ -2057,7 +2278,10 @@ export default function RoadSenseDashboard() {
                     setSelectedIssue={setSelectedIssue}
                     advanceStage={advanceStage}
                     zoneFilter={zoneFilter}
+<<<<<<< HEAD
                     wardFilter={wardFilter}
+=======
+>>>>>>> origin/update-v2
                     onToast={showToast}
                   />
                 )}
